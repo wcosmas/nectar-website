@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -154,18 +155,24 @@ const processSteps = [
     title: "Meeting Our Clients",
     description:
       "We send in our experts in the requirements elicitation phase to draft business processes and remodel them into a complete requirements specification that details the client's needs.",
+    image:
+      "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80",
   },
   {
     step: "02",
     title: "Designing the Product",
     description:
       "We draft designs and work with clients to agree on the flows, scope, and infrastructural requirements. At this level, the client has a complete conceptual overview of the product.",
+    image:
+      "https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=600&q=80",
   },
   {
     step: "03",
     title: "Development & Implementation",
     description:
       "The client is involved in development as tests are run together until satisfaction is reached. The product is deployed and support is provided for the agreed period.",
+    image:
+      "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&q=80",
   },
 ];
 
@@ -307,18 +314,22 @@ export default function Page() {
 
       {/* Hero */}
       <section className="relative flex min-h-[85vh] flex-col items-center justify-center px-6 pt-14">
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -right-32 top-1/4 h-96 w-96 rounded-full bg-primary/5 blur-3xl" />
-          <div className="absolute -left-32 bottom-1/4 h-64 w-64 rounded-full bg-primary/3 blur-3xl" />
-        </div>
+        <Image
+          src="https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?w=1920&q=80"
+          alt="African city skyline"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-black/60" />
         <div className="relative mx-auto max-w-3xl text-center">
-          <p className="mb-6 text-xs tracking-[0.35em] uppercase text-primary">
+          <p className="mb-6 text-xs tracking-[0.35em] uppercase text-white/80">
             Developing Technologies for the African Community
           </p>
-          <h1 className="mb-6 text-3xl font-light leading-tight tracking-tight text-foreground sm:text-4xl md:text-5xl">
+          <h1 className="mb-6 text-3xl font-light leading-tight tracking-tight text-white sm:text-4xl md:text-5xl">
             A team of brilliant minds together changing the face of Africa
           </h1>
-          <p className="mx-auto mb-10 max-w-xl text-sm leading-relaxed text-muted-foreground">
+          <p className="mx-auto mb-10 max-w-xl text-sm leading-relaxed text-white/70">
             We are a group of researchers who have come together to support the
             digitization of Africa through change-leading projects in software
             development, artificial intelligence, and enterprise systems.
@@ -335,7 +346,7 @@ export default function Page() {
           </div>
         </div>
         <div className="absolute bottom-12 left-1/2 -translate-x-1/2">
-          <div className="h-8 w-px bg-border" />
+          <div className="h-8 w-px bg-white/30" />
         </div>
       </section>
 
@@ -348,6 +359,14 @@ export default function Page() {
           <h2 className="mb-12 text-2xl font-light tracking-tight sm:text-3xl">
             Our Story
           </h2>
+          <div className="relative mb-12 aspect-[21/9] w-full overflow-hidden rounded-lg">
+            <Image
+              src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&q=80"
+              alt="Team collaboration"
+              fill
+              className="object-cover"
+            />
+          </div>
           <div className="grid gap-12 md:grid-cols-2">
             <div>
               <h3 className="mb-3 text-xs font-semibold tracking-[0.2em] uppercase text-muted-foreground">
@@ -513,7 +532,15 @@ export default function Page() {
                 key={item.step}
                 className="relative border-l border-border/50 py-2 pl-8 md:border-l-0 md:border-t md:pl-0 md:pt-8 md:pr-8"
               >
-                <div className="absolute left-0 top-0 md:static mb-4">
+                <div className="relative mb-4 aspect-[4/3] w-full overflow-hidden rounded-md">
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div className="mb-4">
                   <span className="text-2xl font-light text-primary/40">
                     {item.step}
                   </span>
@@ -633,12 +660,22 @@ export default function Page() {
                 </div>
               </div>
             </div>
-            <div className="flex items-center justify-center md:justify-end">
-              <div className="text-right">
-                <NectarLogo className="mb-4 ml-auto" />
-                <p className="text-xs leading-relaxed text-muted-foreground max-w-xs">
-                  Developing technologies for the African community since 2019.
-                </p>
+            <div className="relative overflow-hidden rounded-lg">
+              <div className="relative aspect-[4/3] w-full">
+                <Image
+                  src="https://images.unsplash.com/photo-1611348586804-61bf6c080437?w=800&q=80"
+                  alt="Kampala city"
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-black/40" />
+                <div className="absolute bottom-6 left-6 right-6">
+                  <NectarLogo className="mb-3 text-white" />
+                  <p className="text-xs leading-relaxed text-white/70 max-w-xs">
+                    Developing technologies for the African community since
+                    2019.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
