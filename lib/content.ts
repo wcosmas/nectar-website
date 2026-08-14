@@ -395,6 +395,51 @@ export function projectBySlug(slug: string) {
   return projects.find((p) => p.slug === slug);
 }
 
+/**
+ * Institution marks for the "trusted with systems of record by" wall.
+ *
+ * TRUTH RULE applies, and hardest here: a crest is an institution's legal
+ * identity. An entry appears only once that institution's own file is in
+ * /public and its use on this site has been cleared with them. Until then the
+ * key is simply absent and the wall falls back to the name set as type — we do
+ * not draw an approximation of someone else's coat of arms.
+ *
+ * Width and height are the file's intrinsic pixels, so the row reserves its
+ * space before the image decodes.
+ */
+export type ClientMark = { src: string; width: number; height: number };
+
+/**
+ * Each file was taken from the institution's own domain and cropped to the
+ * mark alone — the lockups they ship carry their name baked in at five
+ * different sizes, and Makerere's ships white for a dark header. Cropping to
+ * the crest lets the wall set every name in one typeface at one size.
+ *
+ * Sources: mak.ac.ug · endowment.mak.ac.ug · ubos.org · ahpc.go.ug
+ */
+export const clientMarks: Record<string, ClientMark> = {
+  "Makerere University": {
+    src: "/clients/makerere-university.png",
+    width: 207,
+    height: 160,
+  },
+  "Makerere University Endowment Fund": {
+    src: "/clients/makerere-university-endowment-fund.png",
+    width: 196,
+    height: 160,
+  },
+  "Uganda Bureau of Statistics": {
+    src: "/clients/uganda-bureau-of-statistics.png",
+    width: 160,
+    height: 160,
+  },
+  "Allied Health Professionals Council": {
+    src: "/clients/allied-health-professionals-council.png",
+    width: 115,
+    height: 111,
+  },
+};
+
 export type Service = {
   slug: string;
   name: string;

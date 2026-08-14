@@ -3,6 +3,7 @@ import { projects, services, insights, company } from "@/lib/content";
 import { SystemGraphic } from "@/components/site/system-graphic";
 import { Eyebrow, ButtonLink, ArrowLink } from "@/components/site/ui";
 import { Glyph } from "@/components/site/glyphs";
+import { ClientMark } from "@/components/site/client-mark";
 
 const featured = [
   "allied-health-professionals-council",
@@ -66,13 +67,12 @@ export default function HomePage() {
           <h2 className="type-eyebrow text-ink-faint">
             Trusted with systems of record by
           </h2>
-          <ul className="mt-8 grid gap-x-panel gap-y-5 sm:grid-cols-2 lg:grid-cols-4">
+          {/* items-end so the typeset names sit on one baseline across a row,
+              whatever height each crest crops to. */}
+          <ul className="mt-10 grid items-end gap-x-panel gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
             {clients.map((client) => (
-              <li
-                key={client}
-                className="type-title text-[clamp(0.9375rem,1.3vw,1.0625rem)] text-ink"
-              >
-                {client}
+              <li key={client}>
+                <ClientMark name={client} />
               </li>
             ))}
           </ul>
