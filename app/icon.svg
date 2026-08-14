@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!--
+    Nectar monogram. A Didone N — heavy stems, hairline diagonal, slab serifs —
+    matching the letterhead wordmark. Drawn as paths so it stays sharp at 16px.
+  -->
+  <rect width="64" height="64" rx="8" fill="#004F58"/>
+  <g fill="#F4F7F7">
+    <!-- Left stem with serifs -->
+    <rect x="15" y="17" width="7" height="30"/>
+    <rect x="11" y="17" width="15" height="2.5"/>
+    <rect x="11" y="44.5" width="15" height="2.5"/>
+    <!-- Right stem with serifs -->
+    <rect x="42" y="17" width="7" height="30"/>
+    <rect x="38" y="17" width="15" height="2.5"/>
+    <rect x="38" y="44.5" width="15" height="2.5"/>
+    <!-- Hairline-to-thick diagonal, the Didone contrast -->
+    <path d="M22 17 L27.5 17 L46 47 L40.5 47 Z"/>
+  </g>
+</svg>
