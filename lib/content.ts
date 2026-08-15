@@ -351,7 +351,17 @@ export function projectBySlug(slug: string) {
  * Width and height are the file's intrinsic pixels, so the row reserves its
  * space before the image decodes.
  */
-export type ClientMark = { src: string; width: number; height: number };
+export type ClientMark = {
+  src: string;
+  width: number;
+  height: number;
+  /**
+   * Optical correction on the row's common height, set by eye. Omit for a
+   * roughly square mark; raise it for a portrait one, which otherwise draws
+   * less ink at the same height and reads as the smaller crest.
+   */
+  scale?: number;
+};
 
 /**
  * Each file was taken from the institution's own domain and cropped to the
@@ -359,13 +369,22 @@ export type ClientMark = { src: string; width: number; height: number };
  * sizes. Cropping to the crest lets the wall set every name in one typeface at
  * one size.
  *
- * Buganda Royal Institute has no entry yet: its crest has not been cleared for
- * use here, so the wall sets its name as type. That is the intended fallback,
- * not a gap to be filled with a lookalike.
+ * Both crests carry their institution's name as engraved lettering inside the
+ * mark itself, so neither needed cropping — they arrive as the mark alone.
+ * Buganda's is much taller than it is wide; sizing the row to a common height
+ * is what keeps that from reading as the larger of the two.
  *
- * Sources: ahpc.go.ug
+ * Sources: bribte.ac.ug · ahpc.go.ug
  */
 export const clientMarks: Record<string, ClientMark> = {
+  "Buganda Royal Institute": {
+    src: "/clients/buganda-royal-institute.png",
+    width: 221,
+    height: 301,
+    // A tall shield beside AHPC's roundel. At an equal height it draws about a
+    // third less ink; 1.12 is where the two stop arguing about which is bigger.
+    scale: 1.12,
+  },
   "Allied Health Professionals Council": {
     src: "/clients/allied-health-professionals-council.png",
     width: 115,

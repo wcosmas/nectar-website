@@ -13,6 +13,12 @@ import { cn } from "@/lib/utils";
  * always typeset, never part of the image, so institutions whose crests differ
  * wildly in weight still read as one set.
  *
+ * Common height is the rule, but it is measured by the wrong thing when the
+ * crests disagree about shape: a portrait shield set to the same height as a
+ * landscape roundel draws about a third less ink, and reads as the smaller of
+ * the two. `scale` is the optical correction — a per-mark multiplier on that
+ * common height, set by eye against the rest of the row, not computed.
+ *
  * With no file supplied the name stands alone, which is what the wall did
  * before any crest existed — so this degrades to the old design, not to a gap.
  * The row it sits in should align to `items-end`, which is what keeps a
@@ -29,10 +35,11 @@ export function ClientMark({ name }: { name: string }) {
           alt=""
           width={mark.width}
           height={mark.height}
+          // 3.5rem/56px: these are engraved crests, not wordmarks — below about
+          // this they stop resolving into anything and read as grey smudges.
+          style={{ height: `calc(3.5rem * ${mark.scale ?? 1})` }}
           className={cn(
-            // 56px: these are engraved crests, not wordmarks — below about
-            // this they stop resolving into anything and read as grey smudges.
-            "mb-5 h-14 w-auto object-contain object-left",
+            "mb-5 w-auto object-contain object-left",
             "grayscale transition duration-300 hover:grayscale-0",
           )}
         />
