@@ -7,7 +7,7 @@ import { Glyph } from "@/components/site/glyphs";
 export const metadata: Metadata = {
   title: "Work",
   description:
-    "Nine systems built for Ugandan and pan-African institutions — a national statistics bureau, a health regulator, a university carrying ten thousand staff.",
+    "Two systems of record in service for Ugandan institutions — a tertiary institute carrying thirty thousand student records, and a national health regulator.",
 };
 
 export default function WorkIndex() {
@@ -16,7 +16,7 @@ export default function WorkIndex() {
       <PageHeader
         eyebrow="Work"
         title="Systems in service"
-        lead="Nine projects for named institutions. The seven marked live are systems of record currently in service, and every figure shown is a real count taken from one of them."
+        lead="Two systems of record, both live, both for named institutions. We would rather show you two we can account for in full than a list we cannot. Every figure below is a real count taken from one of them."
       />
 
       <section className="shell pb-section pt-panel">
@@ -63,7 +63,7 @@ export default function WorkIndex() {
                   </p>
                   {project.figures.length > 0 && (
                     <dl className="mt-4 flex flex-wrap gap-x-8 gap-y-2">
-                      {project.figures.slice(0, 2).map((f) => (
+                      {project.figures.map((f) => (
                         <div key={f.label}>
                           <dd className="type-figure text-[1.25rem] text-brand">
                             {f.value}

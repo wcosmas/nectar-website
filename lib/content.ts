@@ -5,6 +5,18 @@
  * Nothing in this file may be invented — no testimonials, pricing, awards,
  * certifications, press, or outcome metrics beyond the counts confirmed in
  * PRODUCT.md. Where a fact is not known, the field is simply absent.
+ *
+ * TWO CLIENTS, DELIBERATELY. Buganda Royal Institute and the Allied Health
+ * Professionals Council are the whole portfolio this site publishes. Earlier
+ * entries were withdrawn on 15 August 2026 at the client's instruction; see
+ * PRODUCT.md before adding anything back. Makerere University appears only as
+ * the team's academic pedigree on the About page, never as a client.
+ *
+ * Where the counts come from:
+ *   Buganda Royal Institute — acaris/docs/legacy-migration-analysis.md
+ *                             (the "Already Migrated" table), the roles seeder,
+ *                             and the portal table in its README.
+ *   Allied Health Professionals Council — the AHPC HRMS repository and its PRD.
  */
 
 export type Figure = { value: string; label: string };
@@ -49,6 +61,152 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    slug: "buganda-royal-institute",
+    name: "ACARIS",
+    headline:
+      "Carrying thirty-three thousand student records onto a system built for them",
+    client: "Buganda Royal Institute",
+    sector: "Tertiary education · Uganda",
+    summary:
+      "Admissions, curriculum, results, finance and graduation for a tertiary institute — with the whole legacy record migrated onto it.",
+    intro:
+      "Buganda Royal Institute ran its academic and financial operation out of a single wide database that had been growing for years: students, fees, debtors, payroll and the general ledger all in one place. ACARIS replaces the academic half of that with a system shaped like the work actually is — versioned curricula, a results approval pipeline, per-semester billing — and brings the history across rather than leaving it behind.",
+    figures: [
+      { value: "33,311", label: "Student records migrated" },
+      { value: "189,619", label: "Payment transactions carried across" },
+      { value: "4", label: "Role-based portals in service" },
+    ],
+    did: [
+      "Migrated 33,311 student records and 189,619 payment transactions off the legacy database",
+      "Modelled curriculum as versions, so a student is held to the syllabus they were admitted under",
+      "Built a four-stage results pipeline from lecturer to registrar, with send-back as a real step",
+      "Made financial clearance a derived fact rather than a declared one",
+      "Delivered four role-based portals across fifteen institutional roles",
+    ],
+    glyph: "enterprise-systems",
+    capabilities: [
+      "Enterprise systems",
+      "Web applications",
+      "Research & consulting",
+    ],
+    live: true,
+    detail: {
+      challenge: [
+        "The record and the books were the same database. Students, fees, debtors, payroll, vendors and the general ledger shared one legacy schema, so nothing in it could be changed without putting everything else in it at risk.",
+        "The curriculum moved and the record did not. A student admitted under one programme version and taught under the next had nowhere in the system to say so, and no way to be told which courses still counted.",
+        "Results travelled by hand. Marks moved between lecturer, head of department and registrar as documents, so nobody could see where a set of them had stopped, or why.",
+        "Clearance was asserted. Whether a student had paid enough to sit an exam was a judgement someone made, not a number the system could stand behind.",
+      ],
+      approach: [
+        {
+          title: "We took the academic half, and said so",
+          body: "The migration study drew an explicit line: students, programmes, registrations and student-facing finance come across; payroll, vendor accounts, the asset register and the general ledger stay where they are. Saying plainly what a system does not replace is what made the rest of it safe to replace.",
+        },
+        {
+          title: "Curriculum is versioned, not overwritten",
+          body: "A programme carries versions, and a student is bound to the version they were admitted under. Course equivalences and curriculum transitions handle the case where they move between them, with the gaps calculated rather than argued about.",
+        },
+        {
+          title: "One pipeline, and a way back down it",
+          body: "Marks go draft, submitted, head of department, registrar, released. The head of department can send a set back to the lecturer, so correction is a stage in the pipeline rather than an exception to it. Release is what opens the fourteen-day complaint window and computes the GPA.",
+        },
+        {
+          title: "Clearance is derived from the ledger",
+          body: "A student counts as financially cleared only when fees have actually been billed against their study period and the balance is zero or below. An unbilled student is not a cleared student, and no permit is printed on the assumption that they are.",
+        },
+        {
+          title: "The migration is a command, not an event",
+          body: "Eight domain migrators run in dependency order behind a single artisan command, with a dry-run mode, a verification phase, and an ID-mapping table that lets the whole thing be run again. A migration you can only perform once is a migration you cannot rehearse.",
+        },
+      ],
+      chains: [
+        {
+          title: "How a set of marks becomes a released result",
+          stations: [
+            {
+              label: "The lecturer enters",
+              body: "Per-assessment marks against a configurable distribution — coursework and exam weighted as the programme defines.",
+            },
+            {
+              label: "The lecturer submits",
+              body: "The set leaves draft and becomes visible to the department. Nothing is released yet.",
+            },
+            {
+              label: "Head of department",
+              body: "Approves, or sends the set back to the lecturer with a reason. The send-back is recorded, not just performed.",
+            },
+            {
+              label: "The registrar approves",
+              body: "The final academic check before anything reaches a student.",
+            },
+            {
+              label: "Released",
+              body: "GPA and CGPA are computed credit-weighted, academic standing is evaluated, and the fourteen-day complaint window opens.",
+            },
+          ],
+        },
+        {
+          title: "How the legacy record became a live one",
+          stations: [
+            {
+              label: "One wide database",
+              body: "Students, fees, debtors, payroll and the ledger, together in a schema built for a different decade.",
+            },
+            {
+              label: "Decide what belongs",
+              body: "The study named what comes across and what does not, so the scope of the migration was a management decision rather than a technical accident.",
+            },
+            {
+              label: "Map, don't copy",
+              body: "One wide student row becomes a user, a student and a profile, with real keys to programme, department and study period.",
+            },
+            {
+              label: "Run it in phases",
+              body: "Programmes, staff, students, fees, payments, reference data, registrations — each its own migrator, each re-runnable against an ID map.",
+            },
+            {
+              label: "Verify, then commit",
+              body: "A dry run and a verification phase come before anything is written for real.",
+            },
+          ],
+        },
+      ],
+      modules: [
+        {
+          name: "Academics & Curriculum",
+          body: "Programmes, departments, course units, programme versions, course mappings, prerequisites, equivalences, curriculum transitions and generated study plans.",
+        },
+        {
+          name: "Exams & Assessment",
+          body: "Per-assessment marks, configurable distributions, the four-stage approval pipeline, GPA and CGPA, grading policies, complaints and a revision history.",
+        },
+        {
+          name: "Finance",
+          body: "Per-student per-semester bills, individual payment transactions, balance and threshold tracking, and the derived clearance status behind every exam permit.",
+        },
+        {
+          name: "Student Lifecycle",
+          body: "Admission and automatic curriculum binding, semester registration, withdrawal, suspension and reinstatement, academic standing, and graduation lists.",
+        },
+        {
+          name: "Timetable",
+          body: "Department timetables with venue and lecturer assignment, conflict detection, the create–approve–publish workflow, and exam manifests.",
+        },
+        {
+          name: "Staff Records",
+          body: "Staff profiles, contracts, qualifications, publications, position and course assignments, and departmental reporting.",
+        },
+      ],
+      stack: [
+        "Laravel 12",
+        "PHP 8.3",
+        "MySQL",
+        "Role-based portals",
+        "Legacy ETL migrators",
+      ],
+    },
+  },
+  {
     slug: "allied-health-professionals-council",
     name: "AHPC Human Resource Management System",
     headline:
@@ -72,7 +230,11 @@ export const projects: Project[] = [
       "Delivered four modules against a live regulator's workload",
     ],
     glyph: "embedded-desktop-systems",
-    capabilities: ["Enterprise systems", "Systems integration", "Web applications"],
+    capabilities: [
+      "Enterprise systems",
+      "Embedded & desktop systems",
+      "Web applications",
+    ],
     live: true,
     detail: {
       challenge: [
@@ -171,224 +333,6 @@ export const projects: Project[] = [
       stack: ["Laravel 12", "PHP 8.3", "Modular monolith", "Read-only device integration"],
     },
   },
-  {
-    slug: "makerere-ehrms",
-    name: "e-HRMS",
-    headline:
-      "Carrying ten thousand staff through a single HR lifecycle",
-    client: "Makerere University",
-    sector: "Higher education · Uganda",
-    summary:
-      "The full human-resource lifecycle for a university carrying more than ten thousand staff.",
-    intro:
-      "Makerere University's human resource operation spans recruitment, payroll, records, and exit for a workforce of more than ten thousand. e-HRMS carries that lifecycle end to end, with AI-assisted reporting layered on top of the record.",
-    figures: [
-      { value: "10,000+", label: "Staff on the system" },
-      { value: "Full", label: "HR lifecycle covered" },
-    ],
-    did: [
-      "Joined recruitment, payroll, records and exit onto one staff record",
-      "Built AI-assisted reporting over the underlying data",
-      "Scaled the system to a workforce of more than ten thousand",
-    ],
-    glyph: "enterprise-systems",
-    capabilities: ["Enterprise systems", "AI & machine learning", "Web applications"],
-    live: true,
-    detail: {
-      challenge: [
-        "A workforce of this size generates more record-keeping than any manual process can carry consistently.",
-        "Recruitment, payroll, records and exit were not joined, so the same fact was maintained in more than one place.",
-      ],
-      approach: [
-        {
-          title: "One record, many stages",
-          body: "Recruitment through payroll, records, exit and reporting all read and write the same staff record, so a change made once is a change made everywhere.",
-        },
-        {
-          title: "Reporting that answers questions",
-          body: "AI-assisted report generation turns the underlying record into the summaries the university's administration actually asks for.",
-        },
-      ],
-    },
-  },
-  {
-    slug: "academic-records-management",
-    name: "Academic Records Management System",
-    headline:
-      "Answering a verification request from the system, not the shelf",
-    client: "Makerere University",
-    sector: "Higher education · Uganda",
-    summary:
-      "Academic records digitised end to end, with document verification and certification support.",
-    intro:
-      "A university that issues academic documents by the tens of thousands needs to be able to verify any one of them on request. This system digitises the record and makes verification and certification a routine operation rather than an archival search.",
-    figures: [
-      { value: "48,839", label: "Student files" },
-      { value: "49,038", label: "Total files" },
-      { value: "1,942", label: "Users" },
-    ],
-    did: [
-      "Digitised 48,839 student files with the structure needed to search them",
-      "Built document verification and certification into routine operation",
-      "Opened the record to 1,942 users across the university",
-    ],
-    glyph: "web-applications",
-    capabilities: ["Enterprise systems", "Digitisation", "Web applications"],
-    live: true,
-    detail: {
-      challenge: [
-        "Verifying a single academic document meant searching a physical archive.",
-        "Certification requests could not be served at the volume the university receives them.",
-      ],
-      approach: [
-        {
-          title: "Digitise the record, not just the document",
-          body: "Files are captured with the structure needed to find and verify them later, rather than as flat scans.",
-        },
-        {
-          title: "Verification as a routine operation",
-          body: "Document verification and certification run against the digitised record, so a request is answered from the system rather than from the shelf.",
-        },
-      ],
-    },
-  },
-  {
-    slug: "graduate-research-information-management",
-    name: "Graduate Research Information Management System",
-    headline:
-      "Seeing where every graduate research project actually stands",
-    client: "Makerere University",
-    sector: "Higher education · Uganda",
-    summary:
-      "Monitors the graduate research cycle from intent submission through supervision to thesis completion.",
-    intro:
-      "Graduate research runs for years and passes through many hands. This system follows a candidate from the submission of intent, through supervision, to a completed thesis — so the university can see where every project actually stands.",
-    figures: [
-      { value: "500+", label: "Students" },
-      { value: "200+", label: "Theses completed" },
-      { value: "150+", label: "Active projects" },
-    ],
-    did: [
-      "Modelled the research cycle itself, from intent to completion",
-      "Tracked supervision and milestones as real events",
-      "Carried 500+ students and 200+ completed theses",
-    ],
-    glyph: "research-consulting",
-    capabilities: ["Enterprise systems", "Research platforms", "Web applications"],
-    live: true,
-    detail: {
-      challenge: [
-        "The progress of a multi-year research project was visible only to the people directly involved in it.",
-        "There was no single place to see how many projects were active, stalled, or complete.",
-      ],
-      approach: [
-        {
-          title: "Follow the cycle, not the paperwork",
-          body: "The system models the research cycle itself — intent, supervision, milestones, completion — so status is derived from real events rather than reported by hand.",
-        },
-      ],
-    },
-  },
-  {
-    slug: "ubos-ehrms",
-    name: "UBOS e-HRMS",
-    headline:
-      "Running human resources for Uganda's national statistics bureau",
-    client: "Uganda Bureau of Statistics",
-    sector: "National government · Uganda",
-    summary:
-      "Electronic human-resource management for Uganda's national statistics bureau.",
-    intro:
-      "The Uganda Bureau of Statistics is the country's national statistical authority. Its human-resource operation runs on a system we built and support.",
-    figures: [{ value: "1,000+", label: "Users" }],
-    did: [
-      "Delivered electronic HR management for the bureau",
-      "Scaled to more than a thousand users",
-    ],
-    glyph: "enterprise-systems",
-    capabilities: ["Enterprise systems", "Web applications"],
-    live: true,
-  },
-  {
-    slug: "makadvance",
-    name: "MakAdvance",
-    headline:
-      "One platform for the donations, and the portfolio they become",
-    client: "Makerere University Endowment Fund",
-    sector: "Institutional finance · Uganda",
-    summary:
-      "The endowment fund's digital platform, handling donations and investment portfolio management.",
-    intro:
-      "The Makerere University Endowment Fund raises and invests on behalf of the university. MakAdvance is the platform behind both halves of that work — the donations that come in, and the portfolio they become.",
-    figures: [],
-    did: [
-      "Built donation handling for the university endowment",
-      "Added investment portfolio management on the same platform",
-    ],
-    glyph: "web-applications",
-    capabilities: ["Web applications", "Enterprise systems"],
-    live: true,
-  },
-  {
-    slug: "ppi-org",
-    name: "PPI ORG",
-    headline:
-      "A research platform built on locally led political economy analysis",
-    client: "Public Policy Institute",
-    sector: "Policy research · Uganda",
-    summary:
-      "A platform for public policy research and engagement built on locally led political economy analysis.",
-    intro:
-      "The Public Policy Institute works through locally led political economy analysis. This platform carries that research and the multi-stakeholder engagement around it.",
-    figures: [],
-    did: [
-      "Built the platform for the Institute's policy research and analysis",
-      "Supported multi-stakeholder engagement around published work",
-    ],
-    glyph: "research-consulting",
-    capabilities: ["Research platforms", "Web applications"],
-    live: true,
-  },
-  {
-    slug: "sickle-cell-identification",
-    name: "Sickle Cell Identification",
-    headline:
-      "Detecting sickle cell disease earlier, from blood cell imagery",
-    client: "Health research",
-    sector: "Applied AI · Diagnostics",
-    summary:
-      "Early detection of sickle cell disease through machine analysis of blood cell imagery.",
-    intro:
-      "A research programme applying image analysis to the early detection of sickle cell disease from blood cell imagery.",
-    figures: [],
-    did: [
-      "Applied machine image analysis to blood cell imagery",
-      "Targeted earlier detection than routine screening allows",
-    ],
-    glyph: "ai-machine-learning",
-    capabilities: ["AI & machine learning", "Research & consulting"],
-    live: false,
-  },
-  {
-    slug: "amr-ai",
-    name: "AMR AI",
-    headline:
-      "Tracking antimicrobial resistance across African borders",
-    client: "Pan-African health",
-    sector: "Applied AI · Public health",
-    summary:
-      "Tracks antimicrobial resistance patterns across participating African countries.",
-    intro:
-      "Antimicrobial resistance does not respect borders. This programme tracks resistance patterns across participating African countries against a shared antibiotics database.",
-    figures: [],
-    did: [
-      "Built resistance tracking across participating countries",
-      "Worked against a shared antibiotics database",
-    ],
-    glyph: "mobile-applications",
-    capabilities: ["AI & machine learning", "Research & consulting", "Mobile applications"],
-    live: false,
-  },
 ];
 
 export function projectBySlug(slug: string) {
@@ -411,28 +355,17 @@ export type ClientMark = { src: string; width: number; height: number };
 
 /**
  * Each file was taken from the institution's own domain and cropped to the
- * mark alone — the lockups they ship carry their name baked in at five
- * different sizes, and Makerere's ships white for a dark header. Cropping to
- * the crest lets the wall set every name in one typeface at one size.
+ * mark alone — the lockups they ship carry their name baked in at several
+ * sizes. Cropping to the crest lets the wall set every name in one typeface at
+ * one size.
  *
- * Sources: mak.ac.ug · endowment.mak.ac.ug · ubos.org · ahpc.go.ug
+ * Buganda Royal Institute has no entry yet: its crest has not been cleared for
+ * use here, so the wall sets its name as type. That is the intended fallback,
+ * not a gap to be filled with a lookalike.
+ *
+ * Sources: ahpc.go.ug
  */
 export const clientMarks: Record<string, ClientMark> = {
-  "Makerere University": {
-    src: "/clients/makerere-university.png",
-    width: 207,
-    height: 160,
-  },
-  "Makerere University Endowment Fund": {
-    src: "/clients/makerere-university-endowment-fund.png",
-    width: 196,
-    height: 160,
-  },
-  "Uganda Bureau of Statistics": {
-    src: "/clients/uganda-bureau-of-statistics.png",
-    width: 160,
-    height: 160,
-  },
   "Allied Health Professionals Council": {
     src: "/clients/allied-health-professionals-council.png",
     width: 115,
@@ -481,7 +414,7 @@ export const services: Service[] = [
     name: "AI & machine learning",
     summary:
       "Applied models where they earn their place — diagnostics, document processing, translation and reporting.",
-    body: "We apply machine learning where it does something a rule could not: reading a blood cell image, extracting a document, generating a report from a record, tracking resistance patterns across countries. The research background of the team is the reason this work is credible rather than decorative.",
+    body: "We apply machine learning where it does something a rule could not — reading an image, extracting a document, generating a report from a record. The research background of the team is the reason this work is credible rather than decorative, and it is also the reason we will tell you when a problem does not need a model.",
     includes: [
       "Image analysis and health diagnostics",
       "OCR and document processing",
@@ -688,49 +621,38 @@ export type Outcome = {
 
 export const outcomes: Outcome[] = [
   {
-    value: "10,000+",
-    claim: "Staff carried on one HR system at Makerere University",
-    slug: "makerere-ehrms",
+    value: "33,311",
+    claim: "Student records migrated onto Buganda Royal Institute's system",
+    slug: "buganda-royal-institute",
   },
   {
-    value: "48,839",
-    claim: "Student files digitised for Makerere University",
-    slug: "academic-records-management",
+    value: "189,619",
+    claim: "Historical payment transactions carried across intact",
+    slug: "buganda-royal-institute",
   },
   {
-    value: "49,038",
-    claim: "Total files held in the academic record",
-    slug: "academic-records-management",
+    value: "115,941",
+    claim: "Semester registrations preserved from the legacy record",
+    slug: "buganda-royal-institute",
   },
   {
-    value: "1,942",
-    claim: "Users on Makerere's Academic Records Management System",
-    slug: "academic-records-management",
+    value: "179",
+    claim: "Staff files migrated into the Institute's staff records",
+    slug: "buganda-royal-institute",
   },
   {
-    value: "1,000+",
-    claim: "Users on the Uganda Bureau of Statistics HR system",
-    slug: "ubos-ehrms",
+    value: "75",
+    claim: "Programmes mapped onto the versioned curriculum model",
+    slug: "buganda-royal-institute",
   },
   {
-    value: "500+",
-    claim: "Graduate students tracked through the research cycle at Makerere",
-    slug: "graduate-research-information-management",
-  },
-  {
-    value: "200+",
-    claim: "Theses carried through to completion",
-    slug: "graduate-research-information-management",
-  },
-  {
-    value: "150+",
-    claim: "Active research projects monitored at any one time",
-    slug: "graduate-research-information-management",
+    value: "15",
+    claim: "Institutional roles carried by ACARIS across four portals",
+    slug: "buganda-royal-institute",
   },
   {
     value: "4",
-    claim:
-      "Modules in production at the Allied Health Professionals Council",
+    claim: "Modules in production at the Allied Health Professionals Council",
     slug: "allied-health-professionals-council",
   },
   {
@@ -739,8 +661,9 @@ export const outcomes: Outcome[] = [
     slug: "allied-health-professionals-council",
   },
   {
-    value: "7",
-    claim: "Systems of record currently in service across our clients",
+    value: "100%",
+    claim: "Read-only at the Council's biometric terminal boundary",
+    slug: "allied-health-professionals-council",
   },
   {
     value: "2019",

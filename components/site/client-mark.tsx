@@ -8,13 +8,15 @@ import { cn } from "@/lib/utils";
  *
  * Three rules keep a row of heraldry from fighting a one-ink page. Crests are
  * sized to a common *height*, never a common width, so none dominates by
- * accident. They are desaturated, because five full-colour coats of arms are
- * louder than anything else on this site — colour returns on hover. And the
- * name is always typeset, never part of the image, which is what lets Makerere
- * and its Endowment Fund share a crest without reading as a duplicate.
+ * accident. They are desaturated, because a full-colour coat of arms is louder
+ * than anything else on this site — colour returns on hover. And the name is
+ * always typeset, never part of the image, so institutions whose crests differ
+ * wildly in weight still read as one set.
  *
  * With no file supplied the name stands alone, which is what the wall did
  * before any crest existed — so this degrades to the old design, not to a gap.
+ * The row it sits in should align to `items-end`, which is what keeps a
+ * crested name on the same baseline as an uncrested one.
  */
 export function ClientMark({ name }: { name: string }) {
   const mark = clientMarks[name];

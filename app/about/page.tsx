@@ -10,7 +10,7 @@ import {
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Nectar Technologies is a research group drawn from Makerere University academia, building and operating systems of record for African institutions since 2019.",
+    "Nectar Technologies is a research group drawn from Makerere University academia, building and operating systems of record for Ugandan institutions since 2019.",
 };
 
 function initials(name: string) {
@@ -28,7 +28,7 @@ export default function AboutPage() {
       <PageHeader
         eyebrow="About"
         title="A research group that ships"
-        lead="Nectar Technologies was founded in Kampala in 2019. The team is drawn from Makerere University academia — one PhD and five MScs — and it operates production systems for national institutions rather than publishing about them."
+        lead="Nectar Technologies was founded in Kampala in 2019. The team is drawn from Makerere University academia — one PhD and five MScs — and it operates the systems it builds rather than publishing about them."
       />
 
       <section className="shell py-section">
