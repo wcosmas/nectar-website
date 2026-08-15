@@ -25,7 +25,11 @@ The website exists to convert institutional evaluation into contact. Success is 
 
 ## Positioning
 
-A research group that ships production systems. The team is drawn from Makerere University academia — the project lead is a PhD senior lecturer, the engineers hold MScs — and it operates real systems of record for national institutions rather than publishing about them. That combination is the claim a neighboring dev shop cannot truthfully copy: consultancies do not carry the research credentials, and university labs do not carry a system in production against a national council's biometric terminals.
+A research group that ships production systems. The team is drawn from Makerere University academia — the project lead is a PhD senior lecturer, the engineers hold MScs — and it operates real systems of record rather than publishing about them. That combination is the claim a neighboring dev shop cannot truthfully copy: consultancies do not carry the research credentials, and university labs do not carry a system in production against a national council's biometric terminals.
+
+Makerere appears on the site only as the team's academic pedigree. It is not a client, and must not be presented as one.
+
+With two clients rather than nine, depth is the argument. Two systems accounted for in full beat a longer list nobody can interrogate, and the site says so plainly rather than hoping the visitor does not count.
 
 ## Operating Context
 
@@ -37,21 +41,18 @@ Work is institutional and long-lived — systems of record with thousands of use
 
 Services offered: web applications, mobile applications, embedded systems, desktop systems, AI and machine learning, research and consulting.
 
-Confirmed project portfolio:
+Confirmed project portfolio. **The site shows two clients and only two.** Earlier
+entries (Makerere University, Uganda Bureau of Statistics, the Makerere
+University Endowment Fund, Public Policy Institute, and the Sickle Cell and AMR
+research programmes) were withdrawn from publication on 15 August 2026 at the
+client's instruction. Do not reintroduce them without a fresh instruction.
 
 | Project | Client | Substance |
 |---|---|---|
-| Academic Records Management System | Makerere University | Records digitization with document verification and certification. 1,942 users, 48,839 student files, 49,038 total files |
-| Graduate Research Information Management System | Makerere University | Monitors the graduate research cycle from intent submission to thesis completion. 150+ active projects, 500+ students, 200+ completed theses |
-| e-HRMS | Makerere University | Full HR lifecycle — recruitment through payroll, records, exit, AI-powered reports. 10,000+ staff |
-| UBOS e-HRMS | Uganda Bureau of Statistics | Electronic HR management for the national statistics bureau. 1,000+ users |
+| ACARIS | Buganda Royal Institute | Academic Records and Information System — versioned curricula, a four-stage results approval pipeline (lecturer → HoD → registrar → released), per-semester billing with derived financial clearance, timetables, staff records and graduation. Four role-based portals across 14 institutional roles. Laravel 12 / PHP 8.3 / MySQL. Legacy ETL off the `bribteacc` database migrated 33,311 student records, 189,619 payment transactions, 115,941 registrations, 179 staff and 75 programmes. Source of truth: `/Users/rtv-lpt-403/Desktop/Projects/ACARIS/acaris` |
 | AHPC HRMS | Allied Health Professionals Council (Uganda) | Biometric attendance read from the Council's HikVision terminals, auditable leave workflow with a data-driven approval chain and balance ledger, staff records, establishment. Laravel 12 / PHP 8.3, four modules. Source of truth: `/Users/rtv-lpt-403/Desktop/Projects/Laravel Projects/uganda-allied-health-professionals` |
-| PPI ORG | Public Policy Institute | Public policy research and engagement using locally led political economy analysis |
-| MakAdvance | Makerere University Endowment Fund | Endowment platform for donations and investment portfolio management |
-| Sickle Cell Identification | Health research | Early detection of sickle cell disease through blood cell image analysis |
-| AMR AI | Pan-African health | Antimicrobial resistance tracking across participating African countries |
 
-The client name **Allied Health Professionals Council (Uganda)** and the technical detail of that system are cleared for public use.
+The client name **Allied Health Professionals Council (Uganda)** and the technical detail of that system are cleared for public use. **Buganda Royal Institute** and the ACARIS detail above are likewise cleared; its crest is not, so the client wall sets that name as type.
 
 Team of six: Dr. Mary Nsabagwa (PhD, Project Lead & System Analyst, Senior Lecturer at Makerere University), Joshua Muhumuza (MSc CS, Lead Tech), Cosmas Wamozo (MSc CS, Lead Front End & AI Engineer), Conrad Suuna (MSc CS, Lead QA Engineer), David Gaamua (MSc IT, Infrastructure Engineer), Ben Wycliff Mugalu (MSc CS, Lead Backend Engineer).
 
@@ -73,6 +74,7 @@ Mission: to empower individuals and communities across Africa through innovative
 
 - **Real:** the project list, client names, and the user/file/staff counts above are verified by the user and may be stated as fact.
 - **Real:** the AHPC codebase, its module structure, and its documented behavior.
+- **Real:** the ACARIS codebase and `docs/legacy-migration-analysis.md`, which is where every Buganda Royal Institute migration count on the site comes from.
 - **Promised, not yet delivered:** product screenshots of the systems and team headshots. The user will supply these.
 - **Absent:** testimonials, pricing, named references, press, certifications, awards, and case-study outcome metrics beyond the counts listed. **None of these may be fabricated.** Any placeholder standing in for real material must be visibly marked and listed for replacement.
 

@@ -5,31 +5,19 @@ import { Eyebrow, ButtonLink, ArrowLink } from "@/components/site/ui";
 import { Glyph } from "@/components/site/glyphs";
 import { ClientMark } from "@/components/site/client-mark";
 
-const featured = [
-  "allied-health-professionals-council",
-  "makerere-ehrms",
-  "academic-records-management",
-];
-
 // Every figure names the institution it came from. A floating stat is not proof.
 const figures = [
-  { value: "10,000+", label: "Staff on one HR system at Makerere University" },
-  { value: "48,839", label: "Student files digitised for Makerere University" },
+  { value: "33,311", label: "Student records migrated at Buganda Royal Institute" },
+  { value: "189,619", label: "Payment transactions carried across intact" },
   {
-    value: "1,000+",
-    label: "Users on the Uganda Bureau of Statistics HR system",
+    value: "4",
+    label: "Modules in production at the Allied Health Professionals Council",
   },
-  { value: "7", label: "Systems of record in service since 2019" },
+  { value: "2019", label: "Building for African institutions since" },
 ];
 
 export default function HomePage() {
-  const clients = Array.from(new Set(projects.map((p) => p.client))).filter(
-    (c) => c !== "Health research" && c !== "Pan-African health",
-  );
-
-  const cases = featured
-    .map((slug) => projects.find((p) => p.slug === slug))
-    .filter((p): p is (typeof projects)[number] => Boolean(p));
+  const clients = Array.from(new Set(projects.map((p) => p.client)));
 
   return (
     <>
@@ -63,13 +51,20 @@ export default function HomePage() {
 
       {/* Who we build for */}
       <section className="border-b border-line bg-paper-alt py-panel">
-        <div className="shell">
-          <h2 className="type-eyebrow text-ink-faint">
-            Trusted with systems of record by
-          </h2>
-          {/* items-end so the typeset names sit on one baseline across a row,
-              whatever height each crest crops to. */}
-          <ul className="mt-10 grid items-end gap-x-panel gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="shell grid gap-panel lg:grid-cols-[22rem_minmax(0,1fr)]">
+          <div>
+            <h2 className="type-eyebrow text-ink-faint">
+              Trusted with systems of record by
+            </h2>
+            <p className="type-body mt-5 max-w-[34ch] text-[0.9375rem] text-ink-soft">
+              Two institutions, two systems their working day depends on. We
+              specified both with the people who use them, and we are still the
+              people supporting them.
+            </p>
+          </div>
+          {/* items-end so the typeset names sit on one baseline, whatever
+              height each crest crops to — and whether or not one exists. */}
+          <ul className="grid items-end gap-x-panel gap-y-10 sm:grid-cols-2">
             {clients.map((client) => (
               <li key={client}>
                 <ClientMark name={client} />
@@ -161,11 +156,11 @@ export default function HomePage() {
               Systems currently in service
             </h2>
           </div>
-          <ArrowLink href="/work">All nine projects</ArrowLink>
+          <ArrowLink href="/work">Both case studies</ArrowLink>
         </div>
 
-        <ul className="mt-panel grid gap-px border-t border-line bg-line lg:grid-cols-3">
-          {cases.map((project) => (
+        <ul className="mt-panel grid gap-px border-t border-line bg-line md:grid-cols-2">
+          {projects.map((project) => (
             <li key={project.slug} className="bg-paper">
               <Link
                 href={`/work/${project.slug}`}
@@ -201,8 +196,8 @@ export default function HomePage() {
                 </p>
 
                 {project.figures.length > 0 && (
-                  <dl className="mt-8 flex flex-wrap gap-x-8 gap-y-3 border-t border-line pt-6">
-                    {project.figures.slice(0, 2).map((f) => (
+                  <dl className="mt-8 flex flex-wrap gap-x-10 gap-y-3 border-t border-line pt-6">
+                    {project.figures.map((f) => (
                       <div key={f.label}>
                         <dd className="type-figure text-[1.375rem] text-ink">
                           {f.value}
